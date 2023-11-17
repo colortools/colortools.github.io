@@ -183,7 +183,7 @@ function draw() {
         textFont(smallFont);
         text("RGB  #" + c.rgb, startX + (squareSize / 2), startY + (squareSize / 2));
         text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 17);
-        if(showCandidates) {
+        if(showCandidates && selectGroup.value() == 'all') {
             text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 34);
         }
         
