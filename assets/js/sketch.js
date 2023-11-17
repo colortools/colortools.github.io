@@ -170,7 +170,7 @@ function draw() {
     if(maxPages > 0) {
         text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 285, topPadding + controlsStartY + 19);    
     } else {
-        text("Keine Ergebnisse", appWidth - pagePadding - 350, topPadding + controlsStartY + 19);    
+        text("No results", appWidth - pagePadding - 310, topPadding + controlsStartY + 19);    
     }
 
     if(colorText.length == 6) {

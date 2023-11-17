@@ -21,6 +21,12 @@ canvas {
 }
 
 input[type=text] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: #000;
     color: #fff;
     padding-left: 8px;   
