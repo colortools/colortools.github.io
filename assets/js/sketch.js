@@ -139,6 +139,7 @@ function colorInputEvent() {
 function draw() {
     background(10);
     fill(255);
+    noStroke();
     textAlign(LEFT);
     textSize(30);
     textFont(boldFont);
@@ -152,9 +153,16 @@ function draw() {
     text("Select Group", pagePadding + 200, topPadding + controlsStartY + 19);
 
     if(colorText.length == 6) {
-        fill("#" + colorText);
-        rect(pagePadding + textWidth(labelRgb) + 80, topPadding + controlsStartY, 30, 30);
-    }    
+        fill("#" + colorText);        
+    } else {
+        noFill();
+        strokeWeight(0.25);
+        stroke('white');
+    } 
+
+    rect(pagePadding + textWidth(labelRgb) + 80, topPadding + controlsStartY, 30, 30);
+
+    noStroke();
 
     let startX = pagePadding;
     let startY = topPadding + colorStartY;
