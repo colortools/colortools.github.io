@@ -127,6 +127,7 @@ function colorInputEvent() {
         if(colorText.length == 6) {
             selectGroup.selected('all');
             findMatches();
+            currentPage = 0;
             showCandidates = true;
         }
     } else {

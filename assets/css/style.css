@@ -23,6 +23,7 @@ canvas {
 input[type=text] {
     background: #000;
     color: #fff;
+    padding-left: 8px;   
     box-sizing: border-box;
     border: none;
     height: 30px;
@@ -54,11 +55,33 @@ button:hover {
     box-shadow: none;
 }
 
+button:active {
+    color: #0a0a0a;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
 select {
-    background: #000;
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* SVG background image */
+    background-color: #000;
+    background-image: url('data:image/svg+xml;utf8,<svg width="8" height="5" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg"><path d="M0.94 0L4 3.09042L7.06 0L8 0.951417L4 5L0 0.951417L0.94 0Z" fill="white"/></svg>');
+    background-size: .6em;
+    background-position: calc(100% - 0.75em) center;
+    background-repeat: no-repeat;
+    padding-left: 8px;    
     color: #fff;
     box-sizing: border-box;
     border: none;
+    border-radius: 0;
     height: 30px;
     border-bottom: 2px solid #ccc;
 }
