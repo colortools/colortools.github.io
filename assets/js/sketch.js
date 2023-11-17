@@ -68,14 +68,14 @@ function setup() {
     nextButton.size(70);
     nextButton.mousePressed(nextPage);
     nextButton.parent("sketchHolder");
-    nextButton.hide();
+    nextButton.attribute('disabled', 'disabled');
 
     prevButton = createButton("Previous");
     prevButton.position(appWidth - pagePadding - 240, topPadding + controlsStartY);
     prevButton.size(70);
     prevButton.mousePressed(prevPage);
     prevButton.parent("sketchHolder");
-    prevButton.hide();
+    nextButton.attribute('disabled', 'disabled');
 
     loadData();
     findMatches();
@@ -137,6 +137,11 @@ function colorInputEvent() {
 }
 
 function draw() {
+    let collection = colors;
+    if(showCandidates) {
+        collection = candidates;
+    }
+
     background(10);
     fill(255);
     noStroke();
@@ -151,6 +156,8 @@ function draw() {
     let labelRgb = "Search RGB";
     text(labelRgb, pagePadding, topPadding + controlsStartY + 19);
     text("Select Group", pagePadding + 200, topPadding + controlsStartY + 19);
+    let maxPages = Math.ceil(collection.length / colorsPerPage);
+    text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 285, topPadding + controlsStartY + 19);
 
     if(colorText.length == 6) {
         fill("#" + colorText);        
@@ -167,11 +174,6 @@ function draw() {
     let startX = pagePadding;
     let startY = topPadding + colorStartY;
     let countColors = 0;
-
-    let collection = colors;
-    if(showCandidates) {
-        collection = candidates;
-    }
 
     collection.forEach(c => {
         countColors++;
@@ -208,14 +210,14 @@ function draw() {
     });
 
     if(currentPage == 0 || collection.length == 0) {
-        prevButton.hide();        
+        prevButton.attribute('disabled', 'disabled');
     } else {
-        prevButton.show();        
+        prevButton.removeAttribute('disabled');
     }
     if(collection.length > (currentPage + 1) * colorsPerPage) {
-        nextButton.show() 
+        nextButton.removeAttribute('disabled');
     } else {
-        nextButton.hide();
+        nextButton.attribute('disabled', 'disabled');
     }
 }
 
