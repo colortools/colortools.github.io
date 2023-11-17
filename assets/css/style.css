@@ -32,6 +32,7 @@ input[type=text] {
     padding-left: 8px;   
     box-sizing: border-box;
     border: none;
+    border-radius: 0;
     height: 30px;
     border-bottom: 2px solid #ccc;
 } 
@@ -40,8 +41,56 @@ input[type=text]:focus {
     outline: none;
 }
 
+/*Checkboxes styles*/
+input[type="checkbox"] { display: none; }
+
+div > label > input[type="checkbox"] + span {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 0px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: #ddd;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+div > label > input[type="checkbox"] + span:last-child { 
+    line-height: 1;
+    margin-bottom: 0; 
+}
+
+div > label > input[type="checkbox"] + span:before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+div > label > input[type="checkbox"]:checked + span:before {
+  width: 6px;
+  top: -2px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 button {
     border: 0;
+    color: #222;
     background: #eee;
     box-shadow: none;
     border-radius: 0px;
@@ -66,6 +115,7 @@ button:active {
 }
 
 button:disabled {
+    color: #aaa;
     cursor: not-allowed;
 }
 

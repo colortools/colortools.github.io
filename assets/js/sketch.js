@@ -8,6 +8,8 @@ let squareSize = 150;
 let squareGap = 20;
 let currentPage = 0;
 let colorsPerPage = 28;
+let showNames = true;
+let showInfo = true;
 
 let lightFont;
 let boldFont;
@@ -25,6 +27,8 @@ let nextButton;
 let prevButton;
 let resetButton;
 let selectGroup;
+let checkName;
+let checkInfo;
 let regex = /[a-fA-F0-9]+$/;
 
 function preload() {
@@ -84,10 +88,29 @@ function setup() {
     prevButton.parent("sketchHolder");
     nextButton.attribute('disabled', 'disabled');
 
+    checkName = createCheckbox('Names', true);
+    checkName.position(appWidth - pagePadding - 380, topPadding + controlsStartY + 6);
+    checkName.changed(checked);
+    checkName.parent("sketchHolder");
+
+    checkInfo = createCheckbox('Info', true);
+    checkInfo.position(appWidth - pagePadding - 450, topPadding + controlsStartY + 6);
+    checkInfo.changed(checked);
+    checkInfo.parent("sketchHolder");
+
     loadData();
     findMatches();
 
     noLoop();
+}
+
+function checked() {
+    showNames = checkName.checked();
+    print(showNames);
+
+    showInfo = checkInfo.checked();
+    print(showInfo);
+    draw();
 }
 
 function groupSelect() {
@@ -205,15 +228,19 @@ function draw() {
         } else {
             fill(255);
         }
-        textSize(12);
-        textFont(boldFont);
-        text(c.nameEN, startX + (squareSize / 2), startY + (squareSize / 2) - 34);
-        text(c.nameDE, startX + (squareSize / 2), startY + (squareSize / 2) - 17);
-        textFont(smallFont);
-        text("RGB  #" + c.rgb, startX + (squareSize / 2), startY + (squareSize / 2));
-        text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 17);
-        if(showCandidates && selectGroup.value() == 'all' && c.rank !== undefined) {
-            text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 34);
+        if(showNames) {
+            textSize(12);
+            textFont(boldFont);
+            text(c.nameEN, startX + (squareSize / 2), startY + (squareSize / 2) - 34);
+            text(c.nameDE, startX + (squareSize / 2), startY + (squareSize / 2) - 17);
+        }
+        if(showInfo) {
+            textFont(smallFont);
+            text("RGB  #" + c.rgb, startX + (squareSize / 2), startY + (squareSize / 2));
+            text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 17);
+            if(showCandidates && selectGroup.value() == 'all' && c.rank !== undefined) {
+                text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 34);
+            }
         }
         
         startX += squareSize + squareGap;
