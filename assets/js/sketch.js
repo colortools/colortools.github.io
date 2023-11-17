@@ -212,7 +212,7 @@ function draw() {
         textFont(smallFont);
         text("RGB  #" + c.rgb, startX + (squareSize / 2), startY + (squareSize / 2));
         text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 17);
-        if(showCandidates && selectGroup.value() == 'all') {
+        if(showCandidates && selectGroup.value() == 'all' && c.rank !== undefined) {
             text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 34);
         }
         
@@ -277,6 +277,7 @@ function filterByName() {
         let de = c['nameDE'].toLowerCase().indexOf(textSearch.value().toLowerCase());
         let en = c['nameEN'].toLowerCase().indexOf(textSearch.value().toLowerCase());
         if(de >= 0 || en >= 0) {
+            c.rank = undefined;
             candidates.push(c);
         }
     });
