@@ -276,7 +276,7 @@ function filterByName() {
     colors.forEach(c => {
         let de = c['nameDE'].toLowerCase().indexOf(textSearch.value().toLowerCase());
         let en = c['nameEN'].toLowerCase().indexOf(textSearch.value().toLowerCase());
-        if(de > 0 || en > 0) {
+        if(de >= 0 || en >= 0) {
             candidates.push(c);
         }
     });
