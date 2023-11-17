@@ -1,0 +1,68 @@
+body {
+    background: #ccc;
+}
+
+canvas {
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#sketchHolder {
+    background: #0a0a0a;
+    width: 1280px;
+    height: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+input[type=text] {
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    border: none;
+    height: 30px;
+    border-bottom: 2px solid #ccc;
+} 
+
+input[type=text]:focus {
+    outline: none;
+}
+
+button {
+    border: 0;
+    background: #eee;
+    box-shadow: none;
+    border-radius: 0px;
+    height: 30px;
+}
+
+button:focus {
+    background:#eee;
+    outline: none;
+    border:none;
+}
+    
+button:hover {
+    background: #eee;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+select {
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    border: none;
+    height: 30px;
+    border-bottom: 2px solid #ccc;
+}
+
+select:focus {
+    outline: none;
+}

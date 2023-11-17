@@ -1,0 +1,27 @@
+title: Color Tools
+email: kammer@htw-dresden.de
+description: >-
+    Color tool written with the help of P5js
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+exclude:
+    - Gemfile
+    - Gemfile.lock
+    - node_modules
+    - vendor/bundle/
+    - vendor/cache/
+    - vendor/gems/
+    - vendor/ruby/
+    - .gitignore
+    - .git
+    - .nvm
+    - docker-compose.yml
+    - LICENSE
+    - README.md
+    - .py
+    - .pde
+    - .pdf
