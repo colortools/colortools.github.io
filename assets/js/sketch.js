@@ -20,6 +20,7 @@ let candidates = [];
 let showCandidates = false;
 let colorText = "";
 let colorInput;
+let textSearch;
 let nextButton;
 let prevButton;
 let resetButton;
@@ -38,8 +39,20 @@ function setup() {
     let cnv = createCanvas(appWidth,appHeight);
     cnv.parent("sketchHolder");
 
+    colorInput = createInput(colorText);
+    colorInput.position(pagePadding + 75, topPadding + controlsStartY);
+    colorInput.size(65);
+    colorInput.input(colorInputEvent)
+    colorInput.parent("sketchHolder");
+
+    textSearch = createInput();
+    textSearch.position(pagePadding + 270, topPadding + controlsStartY);
+    textSearch.size(120);
+    textSearch.id('textsearch');
+    textSearch.parent("sketchHolder");
+
     selectGroup = createSelect();
-    selectGroup.position(pagePadding + 280, topPadding + controlsStartY);
+    selectGroup.position(pagePadding + 485, topPadding + controlsStartY);
     selectGroup.size(100);
     selectGroup.option('all');
     selectGroup.option('Blue');
@@ -50,12 +63,6 @@ function setup() {
     selectGroup.selected('all');
     selectGroup.changed(groupSelect);
     selectGroup.parent("sketchHolder");
-
-    colorInput = createInput(colorText);
-    colorInput.position(pagePadding + 75, topPadding + controlsStartY);
-    colorInput.size(60);
-    colorInput.input(colorInputEvent)
-    colorInput.parent("sketchHolder");
 
     resetButton = createButton("Reset");
     resetButton.position(appWidth - pagePadding - 70, topPadding + controlsStartY);
@@ -91,17 +98,18 @@ function groupSelect() {
         currentPage = 0;
         colorText = "";
         colorInput.value("");
+        textSearch.value("");
         filterByGroup();
         draw();
     }
 }
-
 
 function resetSearch() {
     showCandidates = false;
     currentPage = 0;
     colorText = "";
     colorInput.value("");
+    textSearch.value("");
     selectGroup.selected('all');
     loadData();
     draw();
@@ -126,6 +134,7 @@ function colorInputEvent() {
         }
         if(colorText.length == 6) {
             selectGroup.selected('all');
+            textSearch.value("");
             findMatches();
             currentPage = 0;
             showCandidates = true;
@@ -153,11 +162,16 @@ function draw() {
     fill(255);
     textSize(12);
     textFont(lightFont);
+    text("Enter Name", pagePadding + 195, topPadding + controlsStartY + 19)
+    let maxPages = Math.ceil(collection.length / colorsPerPage);
     let labelRgb = "Search RGB";
     text(labelRgb, pagePadding, topPadding + controlsStartY + 19);
-    text("Select Group", pagePadding + 200, topPadding + controlsStartY + 19);
-    let maxPages = Math.ceil(collection.length / colorsPerPage);
-    text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 285, topPadding + controlsStartY + 19);
+    text("Select Group", pagePadding + 405, topPadding + controlsStartY + 19);
+    if(maxPages > 0) {
+        text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 285, topPadding + controlsStartY + 19);    
+    } else {
+        text("Keine Ergebnisse", appWidth - pagePadding - 350, topPadding + controlsStartY + 19);    
+    }
 
     if(colorText.length == 6) {
         fill("#" + colorText);        
@@ -221,6 +235,26 @@ function draw() {
     }
 }
 
+function keyPressed() {
+    if (keyCode === ENTER) {
+        let el = document.getElementById('textsearch');
+        if(el === document.activeElement) {
+            if(textSearch.value() == '') {
+                resetSearch(); 
+            } else {
+                showCandidates = true;
+                currentPage = 0;
+                colorText = "";
+                colorInput.value("");
+                selectGroup.selected("all");
+                filterByName();
+                draw();
+            }
+            filterByName();
+        }
+    }
+}
+
 function diffColors(c1, c2) {
     c1r = Number("0x" + c1.substring(0,2));
     c1g = Number("0x" + c1.substring(2,4));
@@ -235,6 +269,17 @@ function diffColors(c1, c2) {
 
 function compareRanks(c1, c2) {
     return c1['rank'] - c2['rank'];
+}
+
+function filterByName() {
+    candidates.splice(0,candidates.length);
+    colors.forEach(c => {
+        let de = c['nameDE'].toLowerCase().indexOf(textSearch.value().toLowerCase());
+        let en = c['nameEN'].toLowerCase().indexOf(textSearch.value().toLowerCase());
+        if(de > 0 || en > 0) {
+            candidates.push(c);
+        }
+    });
 }
 
 function filterByGroup() {
