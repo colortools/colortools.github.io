@@ -178,12 +178,13 @@ function draw() {
         }
         textSize(12);
         textFont(boldFont);
-        text(c.nameDE, startX + (squareSize / 2), startY + (squareSize / 2) - 16);
+        text(c.nameEN, startX + (squareSize / 2), startY + (squareSize / 2) - 34);
+        text(c.nameDE, startX + (squareSize / 2), startY + (squareSize / 2) - 17);
         textFont(smallFont);
         text("RGB  #" + c.rgb, startX + (squareSize / 2), startY + (squareSize / 2));
-        text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 16);
+        text("CMYK  " + c.cmyk, startX + (squareSize / 2), startY + (squareSize / 2) + 17);
         if(showCandidates) {
-            text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 32);
+            text("Similarity  " + c.rank, startX + (squareSize / 2), startY + (squareSize / 2) + 34);
         }
         
         startX += squareSize + squareGap;
