@@ -84,12 +84,16 @@ function setup() {
 }
 
 function groupSelect() {
-    showCandidates = true;
-    currentPage = 0;
-    colorText = "";
-    colorInput.value("");
-    filterByGroup();
-    draw();
+    if(selectGroup.value() == 'all') {
+        resetSearch(); 
+    } else {
+        showCandidates = true;
+        currentPage = 0;
+        colorText = "";
+        colorInput.value("");
+        filterByGroup();
+        draw();
+    }
 }
 
 
