@@ -20,16 +20,24 @@ canvas {
     position: relative;
 }
 
+@media only screen and (max-width: 600px) {
+    #sketchHolder {
+        width: 600px;
+        height: 1780px;
+    }
+}
+
 input[type=text] {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
+    font: 13px 'Open Sans', Arial, sans-serif;
     appearance: none;
     background: #000;
     color: #fff;
-    padding-left: 8px;   
+    padding-left: 0px;   
     box-sizing: border-box;
     border: none;
     border-radius: 0;
@@ -49,7 +57,7 @@ div > label > input[type="checkbox"] + span {
   position: relative;
   padding-left: 25px;
   margin-bottom: 0px;
-  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  font: 13px 'Open Sans', Arial, sans-serif;
   color: #ddd;
   cursor: pointer;
   -webkit-user-select: none;
@@ -90,6 +98,7 @@ div > label > input[type="checkbox"]:checked + span:before {
 
 button {
     border: 0;
+    font: 13px 'Open Sans', Arial, sans-serif;
     color: #222;
     background: #eee;
     box-shadow: none;
@@ -124,7 +133,8 @@ select::-ms-expand {
 }
 
 select {
-    margin: 0;      
+    margin: 0;
+    font: 13px 'Open Sans', Arial, sans-serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -135,9 +145,9 @@ select {
     background-color: #000;
     background-image: url('data:image/svg+xml;utf8,<svg width="8" height="5" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg"><path d="M0.94 0L4 3.09042L7.06 0L8 0.951417L4 5L0 0.951417L0.94 0Z" fill="white"/></svg>');
     background-size: .6em;
-    background-position: calc(100% - 0.75em) center;
+    background-position: calc(100% - 0.25em) center;
     background-repeat: no-repeat;
-    padding-left: 8px;    
+    padding-left: 0px;    
     color: #fff;
     box-sizing: border-box;
     border: none;

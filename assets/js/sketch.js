@@ -1,13 +1,17 @@
-let appWidth = 1280;
-let appHeight = 900;
+let holder = document.getElementById('sketchHolder');
+let style = getComputedStyle(holder);
+
+let appWidth = Number(style.width.substring(0, style.width.length - 2)); // 1280;
+let appHeight = Number(style.height.substring(0, style.height.length - 2)); // 900;
 let pagePadding = 55;
 let topPadding = 50;
 let controlsStartY = 40;
-let colorStartY = 130;
+let controlsButtonsY = appWidth <= 600 ? 50 : 0;
+let colorStartY = appWidth <= 600 ? 160 : 130;
 let squareSize = 150;
 let squareGap = 20;
 let currentPage = 0;
-let colorsPerPage = 28;
+let colorsPerPage = appWidth <= 600 ? 27 : 28;
 let showNames = true;
 let showInfo = true;
 
@@ -44,20 +48,20 @@ function setup() {
     cnv.parent("sketchHolder");
 
     colorInput = createInput(colorText);
-    colorInput.position(pagePadding + 75, topPadding + controlsStartY);
-    colorInput.size(65);
+    colorInput.position(pagePadding + 72, topPadding + controlsStartY);
+    colorInput.size(47);
     colorInput.input(colorInputEvent)
     colorInput.parent("sketchHolder");
 
     textSearch = createInput();
-    textSearch.position(pagePadding + 270, topPadding + controlsStartY);
-    textSearch.size(120);
+    textSearch.position(pagePadding + 250, topPadding + controlsStartY);
+    textSearch.size(90);
     textSearch.id('textsearch');
     textSearch.parent("sketchHolder");
 
     selectGroup = createSelect();
-    selectGroup.position(pagePadding + 485, topPadding + controlsStartY);
-    selectGroup.size(100);
+    selectGroup.position(pagePadding + 415, topPadding + controlsStartY);
+    selectGroup.size(75);
     selectGroup.option('all');
     selectGroup.option('Blue');
     selectGroup.option('Yellow');
@@ -69,32 +73,32 @@ function setup() {
     selectGroup.parent("sketchHolder");
 
     resetButton = createButton("Reset");
-    resetButton.position(appWidth - pagePadding - 70, topPadding + controlsStartY);
+    resetButton.position(appWidth - pagePadding - 70, topPadding + controlsStartY + controlsButtonsY);
     resetButton.size(70);
     resetButton.mousePressed(resetSearch);
     resetButton.parent("sketchHolder");    
 
     nextButton = createButton("Next");
-    nextButton.position(appWidth - pagePadding - 155, topPadding + controlsStartY);
+    nextButton.position(appWidth - pagePadding - 155, topPadding + controlsStartY + controlsButtonsY);
     nextButton.size(70);
     nextButton.mousePressed(nextPage);
     nextButton.parent("sketchHolder");
     nextButton.attribute('disabled', 'disabled');
 
     prevButton = createButton("Previous");
-    prevButton.position(appWidth - pagePadding - 240, topPadding + controlsStartY);
+    prevButton.position(appWidth - pagePadding - 240, topPadding + controlsStartY + controlsButtonsY);
     prevButton.size(70);
     prevButton.mousePressed(prevPage);
     prevButton.parent("sketchHolder");
     nextButton.attribute('disabled', 'disabled');
 
     checkName = createCheckbox('Names', true);
-    checkName.position(appWidth - pagePadding - 380, topPadding + controlsStartY + 6);
+    checkName.position(appWidth - pagePadding - 425, topPadding + controlsStartY + controlsButtonsY + 7);
     checkName.changed(checked);
     checkName.parent("sketchHolder");
 
     checkInfo = createCheckbox('Info', true);
-    checkInfo.position(appWidth - pagePadding - 450, topPadding + controlsStartY + 6);
+    checkInfo.position(appWidth - pagePadding - 490, topPadding + controlsStartY + controlsButtonsY + 7);
     checkInfo.changed(checked);
     checkInfo.parent("sketchHolder");
 
@@ -185,15 +189,16 @@ function draw() {
     fill(255);
     textSize(12);
     textFont(lightFont);
-    text("Enter Name", pagePadding + 195, topPadding + controlsStartY + 19)
+    text("Search Text", pagePadding + 175, topPadding + controlsStartY + 19)
     let maxPages = Math.ceil(collection.length / colorsPerPage);
     let labelRgb = "Search RGB";
     text(labelRgb, pagePadding, topPadding + controlsStartY + 19);
-    text("Select Group", pagePadding + 405, topPadding + controlsStartY + 19);
+    text("Group", pagePadding + 360, topPadding + controlsStartY + 19);
+    textAlign(RIGHT);
     if(maxPages > 0) {
-        text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 285, topPadding + controlsStartY + 19);    
+        text((currentPage + 1) + " / " + maxPages, appWidth - pagePadding - 255, topPadding + controlsStartY + controlsButtonsY + 19);    
     } else {
-        text("No results", appWidth - pagePadding - 310, topPadding + controlsStartY + 19);    
+        text("No results", appWidth - pagePadding - 255, topPadding + controlsStartY + controlsButtonsY + 19);    
     }
 
     if(colorText.length == 6) {
@@ -204,7 +209,7 @@ function draw() {
         stroke('white');
     } 
 
-    rect(pagePadding + textWidth(labelRgb) + 80, topPadding + controlsStartY, 30, 30);
+    rect(pagePadding + textWidth(labelRgb) + 60, topPadding + controlsStartY, 30, 30);
 
     noStroke();
 
