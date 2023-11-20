@@ -14,6 +14,7 @@ let currentPage = 0;
 let colorsPerPage = appWidth <= 600 ? 27 : 28;
 let showNames = true;
 let showInfo = true;
+let darkMode = true;
 
 let lightFont;
 let boldFont;
@@ -23,6 +24,7 @@ let smallFontStrong;
 let table;
 let colors = [];
 let candidates = [];
+let hitBoxes = [];
 let showCandidates = false;
 let colorText = "";
 let colorInput;
@@ -95,11 +97,13 @@ function setup() {
     checkName = createCheckbox('Names', true);
     checkName.position(appWidth - pagePadding - 425, topPadding + controlsStartY + controlsButtonsY + 7);
     checkName.changed(checked);
+    checkName.addClass("white");
     checkName.parent("sketchHolder");
 
     checkInfo = createCheckbox('Info', true);
     checkInfo.position(appWidth - pagePadding - 490, topPadding + controlsStartY + controlsButtonsY + 7);
     checkInfo.changed(checked);
+    checkInfo.addClass("white");
     checkInfo.parent("sketchHolder");
 
     loadData();
@@ -153,11 +157,11 @@ function prevPage() {
 }
 
 function colorInputEvent() {
-    if(this.value().match(regex) || this.value() === "") {
-        if(this.value().length<=6) {
-            colorText = this.value();
+    if(colorInput.value().match(regex) || colorInput.value() === "") {
+        if(colorInput.value().length<=6) {
+            colorText = colorInput.value();
         } else {
-            this.value(colorText);
+            colorInput.value(colorText);
         }
         if(colorText.length == 6) {
             selectGroup.selected('all');
@@ -167,7 +171,7 @@ function colorInputEvent() {
             showCandidates = true;
         }
     } else {
-        this.value(colorText);
+        colorInput.value(colorText);
     }
     draw();
 }
@@ -177,16 +181,27 @@ function draw() {
     if(showCandidates) {
         collection = candidates;
     }
-
-    background(10);
-    fill(255);
+    let bgColor = darkMode ? 10 : 249;
+    let fgColor = darkMode ? 255 : 10;
+    background(bgColor);
+    fill(fgColor);
     noStroke();
     textAlign(LEFT);
     textSize(30);
     textFont(boldFont);
     text("RAL MATCHING", pagePadding, topPadding);
 
-    fill(255);
+    // Dark Mode Switch
+    stroke(fgColor);
+    strokeWeight(2);
+    fill(bgColor);
+    ellipse(pagePadding + 260, topPadding  - 11, 22, 22);
+    noStroke();
+    fill(fgColor);
+    ellipse(pagePadding + 260, topPadding  - 11, 17, 17);
+    
+    fill(fgColor);
+    noStroke();
     textSize(12);
     textFont(lightFont);
     text("Search Text", pagePadding + 175, topPadding + controlsStartY + 19)
@@ -216,6 +231,7 @@ function draw() {
     let startX = pagePadding;
     let startY = topPadding + colorStartY;
     let countColors = 0;
+    hitBoxes.splice(0, hitBoxes.length - 1);
 
     collection.forEach(c => {
         countColors++;
@@ -226,6 +242,12 @@ function draw() {
         noStroke();
         fill("#" + c.rgb);
         rect(startX, startY, squareSize, squareSize);
+        let hitBox = {
+            "x": startX,
+            "y": startY,
+            "rgb": c.rgb
+        };
+        hitBoxes.push(hitBox);
         
         textAlign(CENTER);
         if(c['dark'] === '1') {
@@ -265,6 +287,12 @@ function draw() {
     } else {
         nextButton.attribute('disabled', 'disabled');
     }
+
+    fill(249);
+    textFont(smallFont);
+    textSize(12);
+    textAlign(RIGHT);
+    text("Key: " + keyCode, appWidth - pagePadding, topPadding);
 }
 
 function keyPressed() {
@@ -284,6 +312,35 @@ function keyPressed() {
             }
             filterByName();
         }
+    }
+}
+
+function mouseClicked() {
+    hitBoxes.some(b => {
+        if(mouseX > b.x && mouseX < b.x + squareSize && mouseY > b.y && mouseY < b.y + squareSize) {
+            colorText = b.rgb.toLowerCase();
+            colorInput.value(b.rgb.toLowerCase());
+            colorInputEvent();
+            return true;
+        }
+    });
+
+    let d = dist(mouseX, mouseY, pagePadding + 260, topPadding  - 11);
+    if(d<23) {
+        darkMode = !darkMode;
+        if(darkMode) {
+            checkInfo.removeClass("black");
+            checkName.removeClass("black");
+            checkInfo.addClass("white");
+            checkName.addClass("white");
+        } else {
+            checkInfo.removeClass("white");
+            checkName.removeClass("white");
+            checkInfo.addClass("black");
+            checkName.addClass("black");
+        }
+        draw();
+        print("dark");
     }
 }
 

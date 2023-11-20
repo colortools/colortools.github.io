@@ -13,11 +13,20 @@ canvas {
 }
 
 #sketchHolder {
-    background: #0a0a0a;
     width: 1280px;
     height: 900px;
     margin: 0 auto;
     position: relative;
+}
+
+.black {
+    /*background: #0a0a0a;*/
+    color: #000;
+}
+
+.white {
+    /*background: #f9f9f9;*/
+    color: #ddd;
 }
 
 @media only screen and (max-width: 600px) {
@@ -58,7 +67,6 @@ div > label > input[type="checkbox"] + span {
   padding-left: 25px;
   margin-bottom: 0px;
   font: 13px 'Open Sans', Arial, sans-serif;
-  color: #ddd;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
