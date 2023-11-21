@@ -53,12 +53,14 @@ function setup() {
     colorInput.position(pagePadding + 72, topPadding + controlsStartY);
     colorInput.size(47);
     colorInput.input(colorInputEvent)
+    colorInput.addClass("textfield-white");
     colorInput.parent("sketchHolder");
 
     textSearch = createInput();
     textSearch.position(pagePadding + 250, topPadding + controlsStartY);
     textSearch.size(90);
     textSearch.id('textsearch');
+    textSearch.addClass("textfield-white");
     textSearch.parent("sketchHolder");
 
     selectGroup = createSelect();
@@ -72,6 +74,7 @@ function setup() {
     selectGroup.option('White');
     selectGroup.selected('all');
     selectGroup.changed(groupSelect);
+    selectGroup.addClass("textfield-white");
     selectGroup.parent("sketchHolder");
 
     resetButton = createButton("Reset");
@@ -288,11 +291,11 @@ function draw() {
         nextButton.attribute('disabled', 'disabled');
     }
 
-    fill(249);
+    fill(fgColor);
     textFont(smallFont);
     textSize(12);
     textAlign(RIGHT);
-    text("Key: " + keyCode, appWidth - pagePadding, topPadding);
+    text("v1.0", appWidth - pagePadding, topPadding);
 }
 
 function keyPressed() {
@@ -333,14 +336,27 @@ function mouseClicked() {
             checkName.removeClass("black");
             checkInfo.addClass("white");
             checkName.addClass("white");
+
+            textSearch.removeClass("textfield-black");
+            colorInput.removeClass("textfield-black");
+            selectGroup.removeClass("textfield-black");
+            textSearch.addClass("textfield-white");
+            colorInput.addClass("textfield-white");
+            selectGroup.addClass("textfield-white");
         } else {
             checkInfo.removeClass("white");
             checkName.removeClass("white");
             checkInfo.addClass("black");
             checkName.addClass("black");
+
+            textSearch.removeClass("textfield-white");
+            colorInput.removeClass("textfield-white");
+            selectGroup.removeClass("textfield-white");
+            textSearch.addClass("textfield-black");
+            colorInput.addClass("textfield-black");
+            selectGroup.addClass("textfield-black");
         }
         draw();
-        print("dark");
     }
 }
 

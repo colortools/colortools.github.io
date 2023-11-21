@@ -44,15 +44,26 @@ input[type=text] {
     -moz-appearance: none;
     font: 13px 'Open Sans', Arial, sans-serif;
     appearance: none;
-    background: #000;
-    color: #fff;
     padding-left: 0px;   
     box-sizing: border-box;
-    border: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     border-radius: 0;
     height: 30px;
-    border-bottom: 2px solid #ccc;
 } 
+
+.textfield-white {
+    background-color: #000;
+    color: #fff;
+    border-bottom: 2px solid #ccc;
+}
+
+.textfield-black {
+    background-color: #fff;
+    color: #000;
+    border-bottom: 2px solid #555;
+}
 
 input[type=text]:focus {
     outline: none;
@@ -83,7 +94,7 @@ div > label > input[type="checkbox"] + span:before {
   display: block;
   width: 12px;
   height: 12px;
-  border: 1px solid #fff;
+  border: 1px solid #ccc;
   position: absolute;
   left: 0;
   top: 0;
@@ -108,14 +119,14 @@ button {
     border: 0;
     font: 13px 'Open Sans', Arial, sans-serif;
     color: #222;
-    background: #eee;
+    background: #ccc;
     box-shadow: none;
     border-radius: 0px;
     height: 30px;
 }
 
 button:focus {
-    background:#eee;
+    background:#ccc;
     outline: none;
     border:none;
 }
@@ -150,18 +161,17 @@ select {
     -moz-appearance: none;
     appearance: none;
     /* SVG background image */
-    background-color: #000;
     background-image: url('data:image/svg+xml;utf8,<svg width="8" height="5" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg"><path d="M0.94 0L4 3.09042L7.06 0L8 0.951417L4 5L0 0.951417L0.94 0Z" fill="white"/></svg>');
     background-size: .6em;
     background-position: calc(100% - 0.25em) center;
     background-repeat: no-repeat;
     padding-left: 0px;    
-    color: #fff;
     box-sizing: border-box;
-    border: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     border-radius: 0;
     height: 30px;
-    border-bottom: 2px solid #ccc;
 }
 
 select:focus {
