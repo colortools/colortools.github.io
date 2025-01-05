@@ -295,7 +295,7 @@ function draw() {
     textFont(smallFont);
     textSize(12);
     textAlign(RIGHT);
-    text("v1.0", appWidth - pagePadding, topPadding);
+    text("v1.1", appWidth - pagePadding, topPadding);
 }
 
 function keyPressed() {
