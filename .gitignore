@@ -5,6 +5,11 @@ _site/
 .vscode
 **/*.swp
 
+# Ruby
+vendor/
+.bundle/
+Gemfile.lock
+
 # General
 .DS_Store
 .AppleDouble
